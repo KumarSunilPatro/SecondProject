@@ -1,0 +1,46 @@
+<!--<app-pipecomponent></app-pipecomponent>
+<app-parentcomponent></app-parentcomponent>
+<app-template-driven></app-template-driven>-->
+<style>
+  h2
+  {
+      text-align: center;
+      color: blueviolet;
+
+  }
+  span
+  {
+      color:red; 
+  }
+
+</style>
+<div>
+        <h2> Model Driven Forms </h2>
+        <hr>
+        <form [formGroup]="myForm" (submit)="submitMyForm()">
+          Name:
+          <input pattern='[a-z]+'  id="name" formControlName="name" required>
+          <span *ngIf="name.hasError('required') && name.dirty"> Name Required </span>
+          <span *ngIf="name.hasError('pattern') && name.dirty"> Wrong Pattern </span>
+          <br><br>
+      
+          Age:
+          <input  id="age" formControlName="age">
+          <br><br> 
+          
+          Address:
+          <input  id="address" formControlName="address" >
+          <span *ngIf="address.hasError('required') && address.dirty"> Address is Required </span>
+          <span *ngIf="address.hasError('minlength') && address.dirty"> Min 5 characters Required </span>
+          <span *ngIf="address.hasError('maxlength') && address.dirty"> max 10 characters allowed </span>
+          <br><br>
+      
+          <button type="submit" [disabled]="!myForm.valid">Submit</button>
+          &nbsp;
+          <button type="reset"> Reset </button>
+      
+        </form>
+        <hr>
+        <div> Form Value: {{myForm.value | json }} </div>
+        <div> Form Status:{{myForm.status | json }} </div>
+      </div>
